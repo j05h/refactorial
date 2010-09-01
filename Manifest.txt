@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/refactorial
+lib/refactorial.rb
+test/test_refactorial.rb
