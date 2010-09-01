@@ -1,0 +1,79 @@
+== Introduction
+refactorial
+
+Refactorial helps developers find other developers to review and refactor their code. When you join the refactorial 
+network, you create a profile which includes which languages you are willing to code review. When you need code reviewed,
+you send the code in question to our servers. Once we receive that information, we will match the code with an available reviewer.
+You get who you get, and you can't have a fit. As reviewers refactor code and are rated positively, they will receive karma.
+Reviewers with high karma can get paid for their reviews. When a user wants their code reviewed by one of our highly rated reviewers,
+that user can use credits (either accumulated monthly, or paid ad-hoc) to pay for the priviledge.
+
+There is also a private refactorial service. Not all code is something that we want to share with everyone due to NDAs or commercial
+licenses or whathave you. Therefore, we have also created a private version of refactorial. Private accounts decide who is able to
+review their code. It can be anyone in the refactorial community or just their own employees. If you want a private review, simply
+add the '--private' option to the review command.
+
+See refactorial.com for more information.
+
+== Installation
+
+gem install refactorial
+refactorial setup
+
+This:
+1. Configures identity using your ~/.git [github] credentials.
+2. Asks for an IM account (all major brands supported and your IM is *never* given to anyone)
+3. Asks which language(s) you would like to review (must have at least one).
+
+== Usage
+
+refactorial request ./path/to/file.rb
+or
+refactorial request << cat ./path/to/file.rb
+
+Hardcore mode:
+curl -H X-TOKEN:$REFACTORIAL_TOKEN -XPOST http://refactorial.com/request/$REFACTORIAL_USER_NAME << ./path/to/changed/file.rb
+
+The refactorial command:
+1. Creates a new request to refactorial.com for someone to review your code and refactor
+2. Posts the code to your preferred pasting service (gist or pastie.org) with an identifying hash on the first line.
+3. Determines the language it is written in (Ruby, Java, HTML, etc)
+4. Identifies someone to review the code and sends them an IM with a link to the code.
+
+== The Review Process
+
+We identify other users who can review your code. When someone is available to review your code, refactorial asks them to review 
+and refactor. Once a review is in progress, we notify the requester to cut the suspense. If the reviewer wants, he can ask for a 
+pomodoro to help limit the amount of time spent on the review. The reviewer sends the refactored code back when
+they are done. This process is as easy as requesting a review
+
+refactorial review ./path/to/changed/file.rb
+or
+refactorial review << cat ./path/to/changed/file.rb
+
+Hardcore mode:
+curl -H X-TOKEN:$REFACTORIAL_TOKEN -XPOST http://refactorial.com/review/$REFACTORIAL_USER_NAME << ./path/to/changed/file.rb
+
+The refactorial command:
+1. Recognizes the hash code for this reivew
+2. Pastes the diff to your preferred pasting service.
+3. Sends you a link to the diff via IM.
+4. After a few minutes, we will ask you to rate the review.
+5. Gives the reviewer karma based on your rating.
+
+== Plugins
+
+There are plugins for Eclipse, Netbeans, IntelliJ, Visual Studio, Emacs, and Vim.
+
+Get them at http://refactorial.com/plugins
+
+Our plugins will connect with our secure XMPP server whenever you are using your editor of choice. This allows us to skip the 
+other IM services and communicate with you for requests and reviews more efficiently.
+
+== The Website (refactorial.com)
+
+By default, all code that goes through refactorial is public. This means that, once a piece is reviewed, we may post it on our website at refactorial.com so others can see what you've done. Any time you use the '--private' option, your refactor will not be posted.  Reviews for private refactors are never posted.  
+
+At the website, you can browse by language and review rating and see what is going on within your community.
+
+
