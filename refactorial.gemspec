@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler', '>= 1.0.0'
   s.add_development_dependency 'shoulda', '>= 2.11'
+  s.add_dependency 'tomdoc', '>= 0'
   s.add_dependency 'gist', '>= 0'
   s.add_dependency 'xmpp4r-simple', '>= 0'
 

@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    refactorial (0.0.1)
+      gist
+      xmpp4r-simple
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    gist (1.2.1)
+    shoulda (2.11.3)
+    xmpp4r (0.5)
+    xmpp4r-simple (0.8.8)
+      xmpp4r (>= 0.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (>= 1.0.0)
+  gist
+  refactorial!
+  shoulda (>= 2.11)
+  xmpp4r-simple
