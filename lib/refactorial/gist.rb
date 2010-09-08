@@ -1,47 +1,54 @@
 module Refactorial
   # Provides an interface to the gist gem
+  # @attr [String] url Url of the gist
   module Gist
     attr_accessor :url
     # Creating a gist on github
-    # Example
     #
-    #   r = Refactorial.new
-    #   r.create( :file => 'cool.rb', :ext => 'rb' )
+    # @param [String] data tThe file name or a string of the code to be reviewed
+    #
+    # @example
+    #
+    #   r = Refactorial::Request.new
+    #   r.create 'cool.rb'
     #   # => 'http://url.to.gist'
     #
-    # Returns the url of the gist or nil if it cannot post the gist
-    def create options
+    # @return url of the gist or nil if it cannot create the gistd
+    def create data
+      command = command_builder data
+      self.url = `#{command}`
+      self.url
     end
 
     # The command builder will take in a set of options
     # and construct the gist command to send the gist
     # to the server
     #
-    # options - The Hash options is used to build the gist command (default:{}):
-    #           :private - Make the gist private
-    #           :type - Set the langugage of the gist
-    #           :data - the file or string of data that will be the gist
+    # @param [String] :data The file name or a string of the code to be reviewed
     #
-    # Examples
+    # @example
     #
-    #   command_builder :data => 'x = 1 and x += 2'
-    #   # => 'gist "x = 1 and x += 2"'
+    #   command_builder 'x = 1 and x += 2'
+    #   # => 'echo "x = 1 and x += 2" | gist'
     #
-    #   command_builder :data => foo_bars.rb
+    #   command_builder 'foo_bars.rb'
     #   # => 'gist foo_bars.rb'
     #
-    #   command_builder :data => foo_bars.rb, :private => true
-    #   # => 'gist --private foo_bars.rb'
-    #
-    #   command_builder :data => foo_bars.rb, :type => 'rb'
-    #   # => 'gist --type "rb" foo_bars.rb'
-    #
-    # Returns a formatted gist command
-    def command_builder options
-      cmd                        = 'gist'
-      options[:private] and cmd += ' --private '
-      options[:type]    and cmd += " --type '#{options[:type]}' "
-      cmd                       += options[:data]
+    # @return a formatted gist command
+    def command_builder data
+      cmd                            = 'gist'
+      configuration.private? and cmd += ' --private '
+      configuration.type     and cmd += " --type '#{configuration.type}' "
+
+      if File.exists? data
+        cmd += " #{data} "
+      else
+        cmd  = "echo '#{data}' | " + cmd
+      end
+
+      cmd
     end
   end
 end
+
+

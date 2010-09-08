@@ -2,24 +2,29 @@ PATH
   remote: .
   specs:
     refactorial (0.0.1)
+      activesupport
       gist
-      xmpp4r-simple
+      rest-client
 
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.0)
     gist (1.2.1)
+    mime-types (1.16)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
     shoulda (2.11.3)
-    xmpp4r (0.5)
-    xmpp4r-simple (0.8.8)
-      xmpp4r (>= 0.3.2)
+    yard (0.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bundler (>= 1.0.0)
   gist
   refactorial!
+  rest-client
   shoulda (>= 2.11)
-  xmpp4r-simple
+  yard

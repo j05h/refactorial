@@ -1,23 +1,19 @@
+# All the gems
 require 'rubygems'
-require 'xmpp4r-simple'
 require 'gist'
+require 'singleton'
+require 'logger'
+require 'optparse'
+require 'restclient'
+require 'active_support'
 
-module Refactorial
-end
-#Jabber::debug = true
+# All the modules
+require File.dirname(__FILE__) + '/refactorial/version'
+require File.dirname(__FILE__) + '/refactorial/configure'
+require File.dirname(__FILE__) + '/refactorial/gist'
 
-# im = Jabber::Simple.new("refac7orial@gmail.com", "kl3inp3t3r")
-# 
-# im.presence_updates do |update|
-#   from     = update[0].jid.strip.to_s
-#   status   = update[2].status
-#   presence = update[2].show
-#   puts "#{from} went #{presence}: #{status}"
-# end
-# 
-# im.deliver("dorkus@gmail.com", "I have a gist for you!")
-# 
-# im.received_messages { |msg| puts msg.body if msg.type == :chat }
-# 
-# sleep 1
-
+# Classes
+require File.dirname(__FILE__) + '/refactorial/base'
+require File.dirname(__FILE__) + '/refactorial/setup'
+require File.dirname(__FILE__) + '/refactorial/request'
+require File.dirname(__FILE__) + '/refactorial/runner'
