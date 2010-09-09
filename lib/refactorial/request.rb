@@ -21,10 +21,6 @@ module Refactorial
         configuration.site[resource].post payload, :content_type => :json
     end
 
-    def github_user
-      configuration.github_user
-    end
-
     def resource
       "users/#{CGI::escape(github_user)}/requests.json"
     end

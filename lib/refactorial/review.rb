@@ -1,5 +1,5 @@
 module Refactorial
-  module Review
+  module Review < Base
     def resource
       "users/#{CGI::escape(github_user)}/reviews.json"
     end
