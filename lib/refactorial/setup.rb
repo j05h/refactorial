@@ -24,13 +24,6 @@ module Refactorial
       !github_user.nil? and !github_token.nil?
     end
 
-    # Gets the github user.
-    #
-    # @return github username
-    def github_user
-      configuration.github_user
-    end
-
     # Gets the github API token for this user
     #
     # @return the github API token

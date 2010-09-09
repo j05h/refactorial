@@ -12,14 +12,18 @@ module Refactorial
         puts request.create options[:data]
       when 'list'
         case options[:data]
-        when 'request'
+        when 'requests'
           list = Request.new.list
           list.each_with_index do |data, index|
             request = data["request"]
             puts "Request ##{index} at #{Time.parse(request["created_at"]).to_s.green} language #{request["language"].green} url #{request["url"].green}"
           end
         when 'reviews'
-          puts 'not ready yet'
+          list = Review.new.list
+          list.each_with_index do |data, index|
+            request = data["review"]
+            puts "Review ##{index} url #{request["url"].green}"
+          end
         end
       when 'setup'
         setup = Setup.new
@@ -38,7 +42,8 @@ module Refactorial
           opts.banner = %Q[ Usage:
    refactorial setup
    refactorial request ./path/to/file
-   refactorial list request
+   refactorial list requests
+   refactorial list reviews
 
 Options: ]
 
