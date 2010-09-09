@@ -10,6 +10,17 @@ module Refactorial
       when 'request'
         request = Request.new
         puts request.create options[:data]
+      when 'list'
+        case options[:data]
+        when 'request'
+          list = Request.new.list
+          list.each_with_index do |data, index|
+            request = data["request"]
+            puts "Request ##{index} at #{Time.parse(request["created_at"]).to_s.green} language #{request["language"].green} url #{request["url"].green}"
+          end
+        when 'reviews'
+          puts 'not ready yet'
+        end
       when 'setup'
         setup = Setup.new
         setup.create_refactorial_account
@@ -24,7 +35,13 @@ module Refactorial
     def parser args
       Refactorial::Configure.init do |c|
         OptionParser.new do |opts|
-          opts.banner = 'Usage: refactorial request ./path/to/file.rb'
+          opts.banner = %Q[ Usage:
+   refactorial setup
+   refactorial request ./path/to/file
+   refactorial list request
+
+Options: ]
+
 
           opts.on '-v', '--[no-]verbose', 'Turn on verbose' do |v|
             c.verbose = v
@@ -42,6 +59,10 @@ module Refactorial
             c.type = t
           end
 
+          opts.on( "-h", "--help", "Show this message") do |opt|
+            puts opts
+            exit
+          end
         end.parse! args
       end
 

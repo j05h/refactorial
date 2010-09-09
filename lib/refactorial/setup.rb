@@ -28,8 +28,7 @@ module Refactorial
     #
     # @return github username
     def github_user
-      @user ||= `git config --get github.user`.strip
-      @user ||= ENV[:GITHUB_USER].strip
+      configuration.github_user
     end
 
     # Gets the github API token for this user
@@ -45,15 +44,29 @@ module Refactorial
     # @return boolean
     def refactorial_account?
       # Search for this account name
-      true
+        response = configuration.site["users/#{CGI::escape(github_user)}.json"].get
+        json = ActiveSupport::JSON.decode response.body
+        !json.nil?
     end
 
     # Create a refactorial account
-    #
-    # @return json details
     def create_refactorial_account
-      payload = ActiveSupport::JSON.encode( { :user => { :github_account => github_user } } )
-      puts configuration.site['users.json'].post payload, :content_type => :json
+      puts '!' * 80
+      puts ''
+
+      puts "Github user is: #{github_user.nil? ? 'missing'.red : github_user.green}"
+
+      unless authenticated?
+        puts "Creating user account at #{ 'refactorial.com'.green }"
+        payload = ActiveSupport::JSON.encode( { :user => { :github_account => github_user } } )
+        response = configuration.site['users.json'].post payload, :content_type => :json
+      else
+        puts "User #{github_user.green} already created at refactorial.com"
+      end
+
+      puts "Github API token is: #{github_token.nil? ? 'missing'.red : 'configured'.green}"
+      puts ''
+      puts '!' * 80
     end
   end
 end

@@ -40,6 +40,14 @@ module Refactorial
     end
 
     # The logger for the application. By default it will use STDOUT
+    # Gets the github user.
+    #
+    # @return github username
+    def github_user
+      @user ||= `git config --get github.user`.strip
+      @user ||= ENV[:GITHUB_USER].strip
+    end
+
     #
     # @return the logger
     def logger

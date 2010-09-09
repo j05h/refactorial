@@ -6,11 +6,13 @@ require 'logger'
 require 'optparse'
 require 'restclient'
 require 'active_support'
+require 'cgi'
 
 # All the modules
 require File.dirname(__FILE__) + '/refactorial/version'
 require File.dirname(__FILE__) + '/refactorial/configure'
 require File.dirname(__FILE__) + '/refactorial/gist'
+require File.dirname(__FILE__) + '/refactorial/string'
 
 # Classes
 require File.dirname(__FILE__) + '/refactorial/base'
