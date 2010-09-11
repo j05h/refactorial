@@ -30,5 +30,17 @@ class TestRequest < Test::Unit::TestCase
       end
     end
   end
+
+  context "list data" do
+    should "list current requests" do
+      mock_http 'list_requests' do
+        response = @request.list
+        assert_equal 6, response.size
+        response.each do |request|
+          assert_match /https?:\/\//, request["request"]["url"]
+        end
+      end
+    end
+  end
 end
 
