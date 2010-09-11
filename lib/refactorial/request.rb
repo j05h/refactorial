@@ -1,34 +1,38 @@
 module Refactorial
   class Request < Base
-    include Refactorial::Gist
-
-    def create data
-      puts '!' * 80
-      puts ''
-      super data
-      send_request
-      puts "Review created at #{self.url.green} " unless self.url.nil?
-      puts ''
-      puts '!' * 80
+    # While we're in beta, lets have all gists default to private
+    def create data, private_gist = true,  ext = nil, filename = nil
+      url = ::Gist.write data, private_gist, ext, filename
+      post url
     end
 
-    def gist_to_js
-      self.url + '.js'
+    def post url, language = "Ruby"
+      payload = encode( { :request => { :language => language, :url => url } } )
+      decode site[resource].post payload, :content_type => :json
     end
 
-    def send_request
-        payload = ActiveSupport::JSON.encode( { :request => { :language => "Ruby", :url => self.url } } )
-        configuration.site[resource].post payload, :content_type => :json
+    def list
+      response = site[resource].get
+      decode response.body
     end
 
     def resource
       "users/#{CGI::escape(github_user)}/requests.json"
     end
 
-    def list
-      response = configuration.site[resource].get
-      ActiveSupport::JSON.decode response.body
+    private
+    def encode object
+      @encoder ||= Yajl::Encoder.new
+      @encoder.encode object
     end
 
+    def decode json
+      @decoder ||= Yajl::Parser.new
+      @decoder.parse json
+    end
+
+    def site
+      configuration.site
+    end
   end
 end

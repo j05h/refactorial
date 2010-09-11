@@ -2,29 +2,33 @@ PATH
   remote: .
   specs:
     refactorial (0.0.1)
-      activesupport
-      gist
-      rest-client
+      gist (~> 1.2.1)
+      rest-client (~> 1.6.1)
+      yajl-ruby (~> 0.7.7)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.0.0)
+    fakeweb (1.3.0)
     gist (1.2.1)
     mime-types (1.16)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     shoulda (2.11.3)
+    vcr (1.1.2)
+    yajl-ruby (0.7.7)
     yard (0.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
-  bundler (>= 1.0.0)
-  gist
+  bundler (~> 1.0.0)
+  fakeweb (~> 1.3.0)
+  gist (~> 1.2.1)
   refactorial!
-  rest-client
-  shoulda (>= 2.11)
-  yard
+  rest-client (~> 1.6.1)
+  shoulda (~> 2.11)
+  vcr (~> 1.1.2)
+  yajl-ruby (~> 0.7.7)
+  yard (~> 0.6)
