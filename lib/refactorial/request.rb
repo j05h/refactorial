@@ -1,6 +1,6 @@
 module Refactorial
   class Request < Base
-    # While we're in beta, lets have all gists default to private
+    # While we're in development, lets have all gists default to private
     def create data, private_gist = true,  ext = nil, filename = nil
       url = ::Gist.write data, private_gist, ext, filename
       post url
