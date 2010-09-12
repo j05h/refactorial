@@ -40,7 +40,7 @@ class TestRunner < Test::Unit::TestCase
       assert @config.debug?
     end
 
-    should "assing type to lua" do
+    should "assign type to lua" do
       assert_equal "Lua", @config.type
     end
   end
@@ -52,7 +52,8 @@ class TestRunner < Test::Unit::TestCase
     should_call_runner_method 'reviews', 'list_reviews'
 
     should "print not a command message" do
-      assert /poop is not a recognized command/, @runner.run('poop')
+      output = @runner.run('poop')
+      assert /poop is not a recognized command/, output
     end
   end
 

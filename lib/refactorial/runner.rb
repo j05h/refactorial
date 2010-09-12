@@ -55,7 +55,8 @@ module Refactorial
       when 'setup'
         new_setup options
       else
-        print "#{@command} is not a recognized command"
+        print "#{command} is not a recognized command"
+        # we should print the OptionsParser object here.
       end
     end
 
