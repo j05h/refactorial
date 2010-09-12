@@ -21,3 +21,12 @@ def mock_http name
     yield
   end
 end
+
+
+# low rent way to make sure methods are called
+def assert_called instance, meth, options
+  eval "def instance.#{meth}(*args); called_methods('#{meth}', args) ; end"
+  yield
+  assert args = instance.called_methods[meth], "Was expecting #{meth} to be called"
+  assert_equal options, args, "Was expecting #{options.inspect} to match #{args}"
+end

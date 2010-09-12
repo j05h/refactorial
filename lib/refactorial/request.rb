@@ -28,20 +28,5 @@ module Refactorial
     def resource
       "users/#{CGI::escape(github_user)}/requests.json"
     end
-
-    private
-    def encode object
-      @encoder ||= Yajl::Encoder.new
-      @encoder.encode object
-    end
-
-    def decode json
-      @decoder ||= Yajl::Parser.new
-      @decoder.parse json
-    end
-
-    def site
-      configuration.site
-    end
   end
 end
