@@ -46,15 +46,13 @@ class TestRunner < Test::Unit::TestCase
   end
 
   context :run do
-    should "call new_request" do
-      options = {:foo => :bar}
-      assert_called @runner, 'new_request', [options] do
-        @runner.run 'request', options
-      end
-    end
+    should_call_runner_method 'setup', 'new_setup'
+    should_call_runner_method 'request', 'new_request'
+    should_call_runner_method 'requests', 'list_requests'
+    should_call_runner_method 'reviews', 'list_reviews'
 
-    should "call list_requests" do
-      fail "list some requests!"
+    should "print not a command message" do
+      assert /poop is not a recognized command/, @runner.run('poop')
     end
   end
 
@@ -63,6 +61,13 @@ class TestRunner < Test::Unit::TestCase
       mock_http 'new_request' do
         output = @runner.new_request({:data => "something to gistify"})
         assert_match /^Review created at .*https?:/, output
+      end
+    end
+
+    should "not create bad requests" do
+      mock_http 'bad_new_request' do
+        output = @runner.new_request({})
+        assert_match /^There was an error/, output
       end
     end
   end

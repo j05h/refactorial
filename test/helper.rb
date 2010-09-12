@@ -30,3 +30,16 @@ def assert_called instance, meth, options
   assert args = instance.called_methods[meth], "Was expecting #{meth} to be called"
   assert_equal options, args, "Was expecting #{options.inspect} to match #{args}"
 end
+
+module Shoulda
+  module Macros
+    def should_call_runner_method command, meth
+      should "call #{meth}" do
+        options = {:foo => :bar}
+        assert_called @runner, meth, [options] do
+          output = @runner.run command, options
+        end
+      end
+    end
+  end
+end
