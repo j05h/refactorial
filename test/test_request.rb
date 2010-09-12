@@ -32,10 +32,20 @@ class TestRequest < Test::Unit::TestCase
   end
 
   context "list data" do
-    should "list current requests" do
+    should "list current user requests" do
       mock_http 'list_requests' do
+        response = @request.all
+        assert_equal 20, response.size
+        response.each do |request|
+          assert_match /https?:\/\//, request["request"]["url"]
+        end
+      end
+    end
+
+    should "list all current requests" do
+      mock_http 'all_requests' do
         response = @request.list
-        assert_equal 6, response.size
+        assert_equal 5, response.size
         response.each do |request|
           assert_match /https?:\/\//, request["request"]["url"]
         end
