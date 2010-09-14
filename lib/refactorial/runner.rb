@@ -13,6 +13,8 @@ module Refactorial
     end
 
     def new_request options
+      raise "Please supply code to review" unless options[:data]
+
       request = Request.new
       response = request.create options[:data]
       if url = response["request"]["url"]

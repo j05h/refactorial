@@ -66,9 +66,8 @@ class TestRunner < Test::Unit::TestCase
     end
 
     should "not create bad requests" do
-      mock_http 'bad_new_request' do
+      assert_raise(RuntimeError) do
         output = @runner.new_request({})
-        assert_match /^There was an error/, output
       end
     end
   end
