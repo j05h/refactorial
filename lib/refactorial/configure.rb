@@ -5,7 +5,7 @@ module Refactorial
   # @attr_reader [Boolean] debug Turns the debugger on or off
   # @attr_reader [Boolean] verbose Turns the verbose setting on or off
   # @attr_reader [Boolean] private Marks the request as private
-  # @attr_accessor [String] type Sets the language of the request
+  # @attr_writer [String] language Sets the language of the request
   # @attr_reader [Log] log Instance of the logger
   #
   # @example
@@ -14,13 +14,12 @@ module Refactorial
   #     c.debug   = true
   #     c.verbose = true
   #     c.private = false
-  #     c.type    = 'rb'
+  #     c.language    = 'rb'
   #   end
   class Configure
     include Singleton
 
-    attr_writer :debug, :verbose, :private
-    attr_accessor :type
+    attr_writer :debug, :verbose, :private, :language
     attr_reader :log
 
     SERVER = 'http://localhost:3000'
@@ -30,10 +29,10 @@ module Refactorial
     # @example
     #
     #   Refactorial::Configure.init do |c|
-    #     c.debug   = true
-    #     c.verbose = true
-    #     c.private = false
-    #     c.type    = 'rb'
+    #     c.debug    = true
+    #     c.verbose  = true
+    #     c.private  = false
+    #     c.language = 'rb'
     #   end
     def self.init
       yield Configure.instance
@@ -80,6 +79,19 @@ module Refactorial
       @private
     end
 
+    # Given the users input convert the language into something the system
+    # can use
+    def language
+      case @language.to_s.downcase
+      when 'rb', 'ruby'
+        'rb'
+      when 'js', 'javascript'
+        'js'
+      else
+        @language
+      end
+    end
+
     # Clear out ALL configuration settings
     #
     # @return nothing
@@ -91,5 +103,6 @@ module Refactorial
     def site
       @site ||= RestClient::Resource.new SERVER
     end
+
   end
 end

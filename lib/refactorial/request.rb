@@ -7,22 +7,22 @@ module Refactorial
       puts ''
       super data
       send_request
-      puts "Review created at #{self.url.green} " unless self.url.nil?
+      puts "Request created at #{self.url.green} " unless self.url.nil?
       puts ''
       puts '!' * 80
     end
 
-    def gist_to_js
-      self.url + '.js'
-    end
-
     def send_request
         payload = ActiveSupport::JSON.encode( { :request => { :language => "Ruby", :url => self.url } } )
-        configuration.site[resource].post payload, :content_type => :json
+        configuration.site[users_resource].post payload, :content_type => :json
+    end
+
+    def users_resource
+      "users/#{CGI::escape(github_user)}/requests.json"
     end
 
     def resource
-      "users/#{CGI::escape(github_user)}/requests.json"
+      "requests.json"
     end
 
     def list

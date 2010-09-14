@@ -38,7 +38,7 @@ module Refactorial
     def command_builder data
       cmd                            = 'gist'
       configuration.private? and cmd += ' --private '
-      configuration.type     and cmd += " --type '#{configuration.type}' "
+      configuration.language and cmd += " --type '#{configuration.language}' "
 
       if File.exists? data
         cmd += " #{data} "
@@ -48,6 +48,19 @@ module Refactorial
 
       cmd
     end
+
+    # Public git clone of the code snippet
+    def public_clone
+      self.url =~ /(\d+)/
+      "git://gist.github.com/#{$1}.git"
+    end
+
+    # Private git clone if the code snippet
+    def private_clone
+      self.url =~ /(\d+)/
+      "git@gist.github.com/#{$1}.git"
+    end
+
   end
 end
 

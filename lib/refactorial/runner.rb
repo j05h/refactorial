@@ -10,19 +10,20 @@ module Refactorial
       when 'request'
         request = Request.new
         puts request.create options[:data]
+      when 'review'
+        review = Review.new
+        puts review.create options[:data]
       when 'list'
         case options[:data]
         when 'requests'
-          list = Request.new.list
-          list.each_with_index do |data, index|
-            request = data["request"]
-            puts "Request ##{index} at #{Time.parse(request["created_at"]).to_s.green} language #{request["language"].green} url #{request["url"].green}"
-          end
+          request = Request.new
+          selection = ProcessRequest.new request.list
+          selection.process
         when 'reviews'
           list = Review.new.list
           list.each_with_index do |data, index|
             request = data["review"]
-            puts "Review ##{index} url #{request["url"].green}"
+            puts "Review ##{index} url #{request["url"].green}".strip
           end
         end
       when 'setup'
@@ -60,8 +61,8 @@ Options: ]
             c.debug = d
           end
 
-          opts.on '-t', '--type [TYPE]', 'Set the language of the review' do |t|
-            c.type = t
+          opts.on '-l', '--language [LANGUAGE]', 'Set the language of the review' do |l|
+            c.language = l
           end
 
           opts.on( "-h", "--help", "Show this message") do |opt|

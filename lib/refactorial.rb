@@ -17,6 +17,7 @@ require File.dirname(__FILE__) + '/refactorial/string'
 # Classes
 require File.dirname(__FILE__) + '/refactorial/base'
 require File.dirname(__FILE__) + '/refactorial/setup'
+require File.dirname(__FILE__) + '/refactorial/process_request'
 require File.dirname(__FILE__) + '/refactorial/request'
 require File.dirname(__FILE__) + '/refactorial/review'
 require File.dirname(__FILE__) + '/refactorial/runner'
