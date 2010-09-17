@@ -1,0 +1,36 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://localhost:3000/requests.json
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: "OK "
+    headers: 
+      x-ua-compatible: 
+      - IE=Edge
+      etag: 
+      - "\"8c142a8067abb602df7655bc9aadaeb4\""
+      content-type: 
+      - application/json; charset=utf-8
+      connection: 
+      - Keep-Alive
+      x-runtime: 
+      - "0.055926"
+      server: 
+      - WEBrick/1.3.1 (Ruby/1.8.7/2009-06-12)
+      date: 
+      - Sun, 12 Sep 2010 11:50:44 GMT
+      content-length: 
+      - "3308"
+      cache-control: 
+      - max-age=0, private, must-revalidate
+    body: "[{\"request\":{\"created_at\":\"2010-09-08T02:59:33Z\",\"updated_at\":\"2010-09-08T02:59:33Z\",\"url\":\"http://gisthub.com/837321\",\"language\":\"Ruby\",\"id\":31,\"requester_id\":73}},{\"request\":{\"created_at\":\"2010-09-08T02:59:45Z\",\"updated_at\":\"2010-09-08T02:59:45Z\",\"url\":\"http://gisthub.com/262577\",\"language\":\"Ruby\",\"id\":32,\"requester_id\":74}},{\"request\":{\"created_at\":\"2010-09-08T03:00:33Z\",\"updated_at\":\"2010-09-08T03:00:33Z\",\"url\":\"http://gisthub.com/827627\",\"language\":\"Ruby\",\"id\":33,\"requester_id\":75}},{\"request\":{\"created_at\":\"2010-09-08T03:02:21Z\",\"updated_at\":\"2010-09-08T03:02:21Z\",\"url\":\"http://gisthub.com/536592\",\"language\":\"Ruby\",\"id\":34,\"requester_id\":77}},{\"request\":{\"created_at\":\"2010-09-08T03:03:31Z\",\"updated_at\":\"2010-09-08T03:03:31Z\",\"url\":\"http://gisthub.com/150682\",\"language\":\"Ruby\",\"id\":35,\"requester_id\":78}},{\"request\":{\"created_at\":\"2010-09-08T03:07:25Z\",\"updated_at\":\"2010-09-08T03:07:25Z\",\"url\":\"http://gisthub.com/199407\",\"language\":\"Ruby\",\"id\":36,\"requester_id\":80}},{\"request\":{\"created_at\":\"2010-09-08T03:09:02Z\",\"updated_at\":\"2010-09-08T03:09:02Z\",\"url\":\"http://gisthub.com/645827\",\"language\":\"Ruby\",\"id\":37,\"requester_id\":81}},{\"request\":{\"created_at\":\"2010-09-08T03:09:20Z\",\"updated_at\":\"2010-09-08T03:09:20Z\",\"url\":\"http://gisthub.com/929317\",\"language\":\"Ruby\",\"id\":38,\"requester_id\":82}},{\"request\":{\"created_at\":\"2010-09-08T13:29:12Z\",\"updated_at\":\"2010-09-08T13:29:12Z\",\"url\":\"http://gisthub.com/752609\",\"language\":\"Ruby\",\"id\":39,\"requester_id\":83}},{\"request\":{\"created_at\":\"2010-09-08T13:30:08Z\",\"updated_at\":\"2010-09-08T13:30:08Z\",\"url\":\"http://gisthub.com/187169\",\"language\":\"Ruby\",\"id\":40,\"requester_id\":84}},{\"request\":{\"created_at\":\"2010-09-08T14:48:29Z\",\"updated_at\":\"2010-09-08T14:48:29Z\",\"url\":\"http://gisthub.com/391625\",\"language\":\"Ruby\",\"id\":41,\"requester_id\":87}},{\"request\":{\"created_at\":\"2010-09-08T14:53:21Z\",\"updated_at\":\"2010-09-08T14:53:21Z\",\"url\":\"http://gisthub.com/916303\",\"language\":\"Ruby\",\"id\":42,\"requester_id\":88}},{\"request\":{\"created_at\":\"2010-09-08T14:55:16Z\",\"updated_at\":\"2010-09-08T14:55:16Z\",\"url\":\"http://gisthub.com/779723\",\"language\":\"Ruby\",\"id\":43,\"requester_id\":89}},{\"request\":{\"created_at\":\"2010-09-08T15:29:14Z\",\"updated_at\":\"2010-09-08T15:29:14Z\",\"url\":\"http://gisthub.com/313375\",\"language\":\"Ruby\",\"id\":44,\"requester_id\":90}},{\"request\":{\"created_at\":\"2010-09-08T15:29:55Z\",\"updated_at\":\"2010-09-08T15:29:55Z\",\"url\":\"http://gisthub.com/742063\",\"language\":\"Ruby\",\"id\":45,\"requester_id\":91}},{\"request\":{\"created_at\":\"2010-09-08T15:33:33Z\",\"updated_at\":\"2010-09-08T15:33:33Z\",\"url\":\"http://gisthub.com/345259\",\"language\":\"Ruby\",\"id\":46,\"requester_id\":92}},{\"request\":{\"created_at\":\"2010-09-11T14:04:43Z\",\"updated_at\":\"2010-09-11T14:04:43Z\",\"url\":\"http://gist.github.com/575215\\n\",\"language\":\"Ruby\",\"id\":47,\"requester_id\":1}},{\"request\":{\"created_at\":\"2010-09-11T20:00:03Z\",\"updated_at\":\"2010-09-11T20:00:03Z\",\"url\":\"http://gisthub.com/123456\",\"language\":\"Ruby\",\"id\":48,\"requester_id\":1}},{\"request\":{\"created_at\":\"2010-09-11T20:12:55Z\",\"updated_at\":\"2010-09-11T20:12:55Z\",\"url\":\"http://gist.github.com/575505\\n\",\"language\":\"Ruby\",\"id\":49,\"requester_id\":1}},{\"request\":{\"created_at\":\"2010-09-11T20:31:33Z\",\"updated_at\":\"2010-09-11T20:31:33Z\",\"url\":\"https://gist.github.com/70ad7416bdea79654996\",\"language\":\"Ruby\",\"id\":50,\"requester_id\":1}}]"
+    http_version: "1.1"

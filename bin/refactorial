@@ -3,4 +3,5 @@
 require 'rubygems'
 require File.dirname(__FILE__) + '/../lib/refactorial'
 
-Refactorial::Runner.new ARGV
+runner = Refactorial::Runner.new ARGV
+runner.run

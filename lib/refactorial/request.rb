@@ -1,46 +1,32 @@
 module Refactorial
   class Request < Base
-    include Refactorial::Gist
-
-		# Create a gist and send it to github and send the
-		# resulting url to refactorial.com
-		#
-		# @example
-		#		request = Refactorial::Request.new
-		#		request.create 'foo.rb'
-		#		# =>{
-		#				"request":{
-		#					"created_at"   : "2010-09-16T11:52:01Z",
-		#					"updated_at"   : "2010-09-16T11:52:01Z",
-		#					"url"          : "http://gisthub.com/433533",
-		#					"language"     : "Ruby",
-		#					"id"           : 15,
-		#					"requester_id" : 13
-		#					}
-	  #				}
-		#
-		# @returns json results from refactorial.com
-    def create data
-      super data
-      send_request
+    # While we're in development, lets have all gists default to private
+    def create data, private_gist = true,  ext = nil, filename = nil
+      url = ::Gist.write data, private_gist, ext, filename
+      post url
     end
 
-    def send_request
-        payload = ActiveSupport::JSON.encode( { :request => { :language => "Ruby", :url => self.url } } )
-        configuration.site[users_resource].post payload, :content_type => :json
+    # We should probably be passing the filename along with the request instead of the language.
+    # We should not rely on the client to tell us what language to code is, and instead intuit
+    # that on the server side in hopes of better accuracy. Language here should be a suggestion.
+    def post url, language = "Ruby"
+      payload = encode( { :request => { :language => language, :url => url } } )
+      decode site[users_resource].post payload, :content_type => :json
+    end
+
+    # This is only requests that the user made, but not requests that others have made.
+    def list
+      response = site[users_resource].get
+      decode response.body
+    end
+
+    def all
+      response = site['/requests.json'].get
+      decode response.body
     end
 
     def users_resource
-      "users/#{CGI::escape(github_user)}/#{resource}"
-    end
-
-    def resource
-      "requests.json"
-    end
-
-    def list
-      response = configuration.site[resource].get
-      ActiveSupport::JSON.decode response.body
+      "users/#{CGI::escape(github_user)}/requests.json"
     end
 
   end

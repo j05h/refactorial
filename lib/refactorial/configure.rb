@@ -11,10 +11,10 @@ module Refactorial
   # @example
   #
   #   Refactorial::Configure.init do |c|
-  #     c.debug   = true
-  #     c.verbose = true
-  #     c.private = false
-  #     c.language    = 'rb'
+  #     c.debug    = true
+  #     c.verbose  = true
+  #     c.private  = false
+  #     c.language = 'rb'
   #   end
   class Configure
     include Singleton
@@ -82,14 +82,7 @@ module Refactorial
     # Given the users input convert the language into something the system
     # can use
     def language
-      case @language.to_s.downcase
-      when 'rb', 'ruby'
-        'rb'
-      when 'js', 'javascript'
-        'js'
-      else
-        @language
-      end
+      @language
     end
 
     # Clear out ALL configuration settings
@@ -98,7 +91,7 @@ module Refactorial
     def clear_config!
       @debug, @verbose, @private, @language = false, false, false, nil
       @log = nil
-    end
+   end
 
     def site
       @site ||= RestClient::Resource.new SERVER

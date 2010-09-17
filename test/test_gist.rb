@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'helper'
 
 class GistTest < Test::Unit::TestCase
   context "Refactorial can integrate with the gist gem" do

@@ -1,0 +1,77 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://gist.github.com:80/gists
+    body: file_contents%5bgistfile1%5d=puts%20%27hello%20world%27&file_ext%5bgistfile1%5d=.txt&file_name%5bgistfile1%5d=&action_button=private&login=j05h&token=aae325e3951a319c3ccdb7765a0fbd22
+    headers: 
+      accept: 
+      - "*/*"
+      content-type: 
+      - application/x-www-form-urlencoded
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 302
+      message: Found
+    headers: 
+      location: 
+      - https://gist.github.com/70ad7416bdea79654996
+      content-type: 
+      - text/html; charset=utf-8
+      connection: 
+      - keep-alive
+      server: 
+      - nginx/0.7.67
+      date: 
+      - Sat, 11 Sep 2010 20:29:38 GMT
+      x-runtime: 
+      - 270ms
+      content-length: 
+      - "110"
+      set-cookie: 
+      - _github_ses=BAh7BzoRbG9jYWxlX2d1ZXNzMCIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7AA%3D%3D--e10506e0f6935897cafe4f56774e20aa35e579a5; path=/; expires=Wed, 01 Jan 2020 08:00:00 GMT; HttpOnly
+      status: 
+      - 302 Found
+      cache-control: 
+      - no-cache
+    body: <html><body>You are being <a href="https://gist.github.com/70ad7416bdea79654996">redirected</a>.</body></html>
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://localhost:3000/users/j05h/requests.json
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      content-type: 
+      - application/json
+      accept-encoding: 
+      - gzip, deflate
+      content-length: 
+      - "84"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 201
+      message: "Created "
+    headers: 
+      x-ua-compatible: 
+      - IE=Edge
+      location: 
+      - http://localhost:3000/requests/50
+      content-type: 
+      - application/json; charset=utf-8
+      connection: 
+      - Keep-Alive
+      x-runtime: 
+      - "0.120005"
+      server: 
+      - WEBrick/1.3.1 (Ruby/1.8.7/2009-06-12)
+      date: 
+      - Sat, 11 Sep 2010 20:31:33 GMT
+      content-length: 
+      - "181"
+      cache-control: 
+      - no-cache
+    body: "{\"request\":{\"created_at\":\"2010-09-11T20:31:33Z\",\"updated_at\":\"2010-09-11T20:31:33Z\",\"url\":\"https://gist.github.com/70ad7416bdea79654996\",\"language\":\"Ruby\",\"id\":50,\"requester_id\":1}}"
+    http_version: "1.1"
