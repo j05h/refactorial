@@ -7,12 +7,14 @@ module Refactorial
       options = parser args
 
       case options[:command]
-      when 'request'
-        request = Request.new
-        puts request.create options[:data]
+			when 'request'
+				request = Request.new
+				request.create options[:data]
+				puts "Request created at #{request.url.green} " unless request.url.nil?
       when 'review'
         review = Review.new
-        puts review.create options[:data]
+        review.create options[:data]
+				puts "Review created at #{review.url.green} " unless review.url.nil?
       when 'list'
         case options[:data]
         when 'requests'

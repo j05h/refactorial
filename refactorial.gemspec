@@ -17,10 +17,13 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler', '>= 1.0.0'
   s.add_development_dependency 'shoulda', '>= 2.11'
+  s.add_development_dependency 'fakeweb', '>= 1.3.0'
   s.add_development_dependency 'yard', '>= 0'
+  s.add_development_dependency 'rr'
   s.add_dependency 'activesupport', '>= 0'
   s.add_dependency 'rest-client', '>= 0'
   s.add_dependency 'gist', '>= 0'
+  s.add_dependency 'oauth2', '>= 0'
 
   s.extra_rdoc_files   = [ "README.rdoc" ]
   s.test_files         = [ "test/test_refactorial.rb" ]

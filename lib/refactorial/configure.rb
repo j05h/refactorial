@@ -96,7 +96,7 @@ module Refactorial
     #
     # @return nothing
     def clear_config!
-      @default, @verbose, @private, = false, false, false
+      @debug, @verbose, @private, @language = false, false, false, nil
       @log = nil
     end
 

@@ -37,16 +37,16 @@ module Refactorial
     # @return a formatted gist command
     def command_builder data
       cmd                            = 'gist'
-      configuration.private? and cmd += ' --private '
-      configuration.language and cmd += " --type '#{configuration.language}' "
+      configuration.private? and cmd += " --private"
+      configuration.language and cmd += " --type '#{configuration.language}'"
 
       if File.exists? data
-        cmd += " #{data} "
+        cmd += " #{data}"
       else
         cmd  = "echo '#{data}' | " + cmd
       end
 
-      cmd
+      cmd.strip
     end
 
     # Public git clone of the code snippet

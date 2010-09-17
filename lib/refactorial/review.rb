@@ -3,13 +3,8 @@ module Refactorial
     include Refactorial::Gist
 
     def create data
-      puts '!' * 80
-      puts ''
       super data
       send_request
-      puts "Review created at #{self.url.strip.green} " unless self.url.nil?
-      puts ''
-      puts '!' * 80
     end
 
     def send_request
@@ -18,7 +13,7 @@ module Refactorial
     end
 
     def users_resource
-      "users/#{CGI::escape(github_user)}/reviews.json"
+      "users/#{CGI::escape(github_user)}/#{resource}"
     end
 
     def resource
@@ -26,7 +21,7 @@ module Refactorial
     end
 
     def list
-      response = configuration.site[users_resource].get
+      response = configuration.site[resource].get
       ActiveSupport::JSON.decode response.body
     end
   end
