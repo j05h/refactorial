@@ -26,7 +26,7 @@ module Refactorial
     end
 
     def users_resource
-      "users/#{CGI::escape(github_user)}/requests.json"
+      "#{user_base}/requests.json"
     end
 
   end

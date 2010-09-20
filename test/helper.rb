@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'bundler/setup'
 require 'test/unit'
 require 'shoulda'
 require 'fakeweb'
@@ -22,8 +23,6 @@ def mock_http name
   VCR.use_cassette name, :record => :new_episodes do
     yield
   end
-
-
 end
 
 # override system calls

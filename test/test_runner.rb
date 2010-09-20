@@ -20,13 +20,13 @@ end
 class TestRunner < Test::Unit::TestCase
   def setup
     @runner = Refactorial::Runner.new []
+    stub( Refactorial::Configure.instance ).github_user.returns 'j05h'
   end
 
   context :parse_options do
     setup do
       @runner.parse_options "-v -p -d -l Lua".split
       @config = Refactorial::Configure.instance
-      stub( @config ).github_user.returns  'j05h'
     end
 
     should "be verbose" do

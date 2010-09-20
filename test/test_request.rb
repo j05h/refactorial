@@ -3,7 +3,7 @@ require 'helper'
 class TestRequest < Test::Unit::TestCase
   def setup
     @request = Refactorial::Request.new
-    stub( Refactorial::Configure.instance ).github_user.returns  'j05h'
+    stub( Refactorial::Configure.instance ).github_user.returns 'j05h'
   end
 
   context "resource" do

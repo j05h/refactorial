@@ -1,28 +1,27 @@
 module Refactorial
   class Review < Base
-    include Refactorial::Gist
 
-    def create data
-      super data
-      send_request
+    def create data, private_gist = true, ext = nil, filename = nil
+      url = ::Gist.write data, private_gist, ext, filename
+      post url
     end
 
-    def send_request
-        payload = ActiveSupport::JSON.encode( { :request => { :url => self.url } } )
-        configuration.site[users_resource].post payload, :content_type => :json
+    def post
+      payload = encode( { :request => { :url => self.url } } )
+      configuration.site[users_resource].post payload, :content_type => :json
     end
 
     def users_resource
-      "users/#{CGI::escape(github_user)}/#{resource}"
+      "#{user_base}/#{resource}"
     end
 
     def resource
       "reviews.json"
     end
 
-    def list
+    def all
       response = configuration.site[resource].get
-      ActiveSupport::JSON.decode response.body
+      decode response.body
     end
   end
 end
