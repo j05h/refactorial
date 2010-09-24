@@ -21,13 +21,16 @@ module Refactorial
     end
 
     def all
-      response = site['/requests.json'].get
+      response = site[resource].get
       decode response.body
     end
 
     def users_resource
-      "#{user_base}/requests.json"
+      "#{user_base}/#{resource}"
     end
 
+    def resource
+      "requests.json"
+    end
   end
 end

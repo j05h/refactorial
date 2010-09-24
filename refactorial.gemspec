@@ -14,12 +14,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = '~> 1.3.6'
 
-  s.add_development_dependency 'bundler', '~> 1.0.0'
-  s.add_development_dependency 'shoulda', '~> 2.11'
-  s.add_development_dependency 'yard',    '~> 0.6'
-  s.add_development_dependency 'vcr',     '~> 1.1.2'
-  s.add_development_dependency 'fakeweb', '~> 1.3.0'
-  s.add_development_dependency 'rr',      '~> 1.0.0'
+  s.add_development_dependency 'bundler',       '~> 1.0.0'
+  s.add_development_dependency 'shoulda',       '~> 2.11'
+  s.add_development_dependency 'yard',          '~> 0.6'
+  s.add_development_dependency 'vcr',           '~> 1.1.2'
+  s.add_development_dependency 'fakeweb',       '~> 1.3.0'
+  s.add_development_dependency 'rr',            '~> 1.0.0'
 
   s.add_dependency 'yajl-ruby',   '~> 0.7.7'
   s.add_dependency 'rest-client', '~> 1.6.1'

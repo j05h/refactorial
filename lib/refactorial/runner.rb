@@ -43,7 +43,15 @@ module Refactorial
 
     def new_setup options
       setup = Setup.new
-      setup.create_refactorial_account
+      print "Missing github account" unless setup.github_account?
+      if setup.refactorial_account?
+        print "Refactorial account already setup for #{setup.github_user.green}" if setup.refactorial_account?
+      else
+        setup.create_account
+        print "Refactorial account setup for #{setup.github_user.green}" if setup.refactorial_account?
+      end
+
+      print "API token is " + setup.github_token.nil? ? 'not setup'.red : 'ok'.green
     end
 
     def run command = @command, options = @options

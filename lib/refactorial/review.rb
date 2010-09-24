@@ -6,9 +6,9 @@ module Refactorial
       post url
     end
 
-    def post
-      payload = encode( { :request => { :url => self.url } } )
-      configuration.site[users_resource].post payload, :content_type => :json
+    def post url, id
+      payload = encode( { :request_id => id, :review => { :url => url } } )
+      decode site[users_resource].post payload, :content_type => :json
     end
 
     def users_resource
@@ -17,6 +17,11 @@ module Refactorial
 
     def resource
       "reviews.json"
+    end
+
+    def list
+      response = configuration.site[users_resource].get
+      decode response.body
     end
 
     def all

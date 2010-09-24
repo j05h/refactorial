@@ -91,7 +91,7 @@ module Refactorial
     def clear_config!
       @debug, @verbose, @private, @language = false, false, false, nil
       @log = nil
-   end
+    end
 
     def site
       @site ||= RestClient::Resource.new SERVER

@@ -7,8 +7,12 @@ class TestRequest < Test::Unit::TestCase
   end
 
   context "resource" do
-    should "create a valid resource" do
+    should "create a valid users resource" do
       assert_equal "users/j05h/requests.json", @request.users_resource
+    end
+
+    should "create a valid resource" do
+      assert_equal "requests.json", @request.resource
     end
   end
 
