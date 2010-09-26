@@ -5,13 +5,13 @@ module Refactorial
     # This will determine if the user has both a
     # github account and a refactorial account
     #
-    # @example
+    # Example
     #
     #   setup = Setup.new
     #   setup.authenticated?
     #   # => true
     #
-    # @return boolean
+    # Return boolean
     def authenticated?
       refactorial_account? and github_account?
     end
@@ -19,14 +19,14 @@ module Refactorial
     # In order to have a valid github account
     # both the user and API token must be setup
     #
-    # @return boolean
+    # Return boolean
     def github_account?
       !github_user.nil? and !github_token.nil?
     end
 
     # Gets the github API token for this user
     #
-    # @return the github API token
+    # Return the github API token
     def github_token
       @token ||= `git config --get github.token`.strip
       @token ||= ENV[:GITHUB_TOKEN].strip
@@ -34,22 +34,22 @@ module Refactorial
 
     # Is the refactorial account setup
     #
-    # @return boolean
+    # Return boolean
     def refactorial_account?
       # Search for this account name
       !get_account.nil?
     end
 
     def get_account
-      response = configuration.site["users/#{CGI::escape(github_user)}.json"].get
-      decode response.body
+      response = site["users/#{CGI::escape(github_user)}.json"].get
+      decode response unless response == 'null'
     end
 
     # Create a refactorial account
     def create_account
       unless authenticated?
         payload = encode( { :user => { :github_account => github_user } } )
-        response = configuration.site['users.json'].post payload, :content_type => :json
+        response = site['users.json'].post payload, :content_type => :json
         !response.nil?
       end
     end

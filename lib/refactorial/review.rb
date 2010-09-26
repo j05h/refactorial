@@ -1,9 +1,9 @@
 module Refactorial
   class Review < Base
 
-    def create data, private_gist = true, ext = nil, filename = nil
+    def create data, review_id, private_gist = true, ext = nil, filename = nil
       url = ::Gist.write data, private_gist, ext, filename
-      post url
+      post url, review_id
     end
 
     def post url, id
@@ -20,12 +20,12 @@ module Refactorial
     end
 
     def list
-      response = configuration.site[users_resource].get
+      response = site[users_resource].get
       decode response.body
     end
 
     def all
-      response = configuration.site[resource].get
+      response = site[resource].get
       decode response.body
     end
   end

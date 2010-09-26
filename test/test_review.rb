@@ -28,4 +28,35 @@ class TestReview < Test::Unit::TestCase
     end
   end
 
+  context "create data" do
+    should "create a new gist" do
+      mock_http 'create_gist' do
+        response = @review.create "puts 'hello world'", 2
+        assert_match "//gist.github.com/70ad7416bdea79654996", response["review"]["url"]
+        assert_equal  2, response["review"]["request_id"].to_i
+      end
+    end
+  end
+
+  context "list data" do
+    should "list current user reviews" do
+      mock_http 'list_reviews' do
+        response = @review.all
+        assert_equal 7, response.size
+        response.each do |review|
+          assert_match /https?:\/\//, review["review"]["url"]
+        end
+      end
+    end
+
+    should "list all current reviews" do
+      mock_http 'all_reviews' do
+        response = @review.list
+        assert_equal 3, response.size
+        response.each do |review|
+          assert_match /https?:\/\//, review["review"]["url"]
+        end
+      end
+    end
+  end
 end
