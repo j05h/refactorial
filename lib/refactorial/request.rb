@@ -1,5 +1,6 @@
 module Refactorial
   class Request < Base
+
     # While we're in development, lets have all gists default to private
     def create data, private_gist = true,  ext = nil, filename = nil
       url = ::Gist.write data, private_gist, ext, filename
@@ -11,26 +12,31 @@ module Refactorial
     # that on the server side in hopes of better accuracy. Language here should be a suggestion.
     def post url, language = "Ruby"
       payload = encode( { :request => { :language => language, :url => url } } )
-      decode site[users_resource].post payload, :content_type => :json
+      decode site[resource[:user]].post payload, :content_type => :json
+    end
+
+    def pop
+      response = site[resource[:pop]].get
+      decode response.body
     end
 
     # This is only requests that the user made, but not requests that others have made.
     def list
-      response = site[users_resource].get
+      response = site[resource[:user]].get
       decode response.body
     end
 
     def all
-      response = site[resource].get
+      response = site[resource[:base]].get
       decode response.body
     end
 
-    def users_resource
-      "#{user_base}/#{resource}"
-    end
-
     def resource
-      "requests.json"
+      {
+        :base => "requests.json",
+        :pop  => "requests/pop.json",
+        :user => "#{user_base}/requests.json"
+      }
     end
   end
 end

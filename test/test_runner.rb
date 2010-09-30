@@ -51,6 +51,7 @@ class TestRunner < Test::Unit::TestCase
     should_call_runner_method 'request', 'new_request'
     should_call_runner_method 'requests', 'list_requests'
     should_call_runner_method 'reviews', 'list_reviews'
+    should_call_runner_method 'pop', 'pop_review'
 
     should "print not a command message" do
       output = @runner.run('poop')

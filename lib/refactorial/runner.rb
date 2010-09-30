@@ -64,6 +64,8 @@ module Refactorial
         list_reviews options
       when 'setup'
         new_setup options
+      when 'pop'
+        pop_review options
       else
         print "#{command} is not a recognized command"
         # we should print the OptionsParser object here.

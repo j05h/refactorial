@@ -8,11 +8,15 @@ class TestRequest < Test::Unit::TestCase
 
   context "resource" do
     should "create a valid users resource" do
-      assert_equal "users/j05h/requests.json", @request.users_resource
+      assert_equal "users/j05h/requests.json", @request.resource[:user]
     end
 
     should "create a valid resource" do
-      assert_equal "requests.json", @request.resource
+      assert_equal "requests.json", @request.resource[:base]
+    end
+
+    should "create a pop valid resource" do
+      assert_equal "requests/pop.json", @request.resource[:pop]
     end
   end
 
@@ -55,6 +59,13 @@ class TestRequest < Test::Unit::TestCase
         response.each do |request|
           assert_match /https?:\/\//, request["request"]["url"]
         end
+      end
+    end
+
+    should 'pop the first request ready for review' do
+      mock_http 'pop_request' do
+        response = @request.pop
+        assert_match /https?:\/\//, response["request"]["url"]
       end
     end
   end
