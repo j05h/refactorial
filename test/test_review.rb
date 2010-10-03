@@ -8,11 +8,11 @@ class TestReview < Test::Unit::TestCase
 
   context "resource" do
     should "create a users valid resource" do
-      assert_equal "users/c4jun/reviews.json", @review.users_resource
+      assert_equal "users/c4jun/reviews.json", @review.resource[:user]
     end
 
     should "create a valid resource" do
-      assert_equal "reviews.json", @review.resource
+      assert_equal "reviews.json", @review.resource[:base]
     end
   end
 

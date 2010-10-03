@@ -69,5 +69,33 @@ class TestRequest < Test::Unit::TestCase
       end
     end
   end
+
+  context 'get code for review' do
+    setup do
+      @cmd = @request.clone 'http://gist.github.com/12341231251'
+    end
+
+    should 'clone to ~/refactorial' do
+      assert_match /~\/refactorial$/, @cmd
+    end
+
+    should 'clone request' do
+      assert_match "git clone git@gist.github.com:12341231251.git", @cmd
+    end
+
+    should 'clone only valid http url' do
+      url = 'not valid http url'
+      assert_raise ArgumentError do
+        @request.clone url
+      end
+    end
+
+    should 'allow http url' do
+      url = 'http://gist.github.com/12341231251'
+      assert_nothing_raised ArgumentError do
+        @request.clone url
+      end
+    end
+  end
 end
 

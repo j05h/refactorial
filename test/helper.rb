@@ -46,9 +46,8 @@ end
 
 module Shoulda
   module Macros
-    def should_call_runner_method command, meth
+    def should_call_runner_method command, meth, options = {:foo => :bar }
       should "call #{meth}" do
-        options = {:foo => :bar}
         assert_called @runner, meth, [options] do
           output = @runner.run command, options
         end

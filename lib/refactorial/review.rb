@@ -8,24 +8,23 @@ module Refactorial
 
     def post url, id
       payload = encode( { :request_id => id, :review => { :url => url } } )
-      decode site[users_resource].post payload, :content_type => :json
-    end
-
-    def users_resource
-      "#{user_base}/#{resource}"
+      decode site[resource[:user]].post payload, :content_type => :json
     end
 
     def resource
-      "reviews.json"
+      {
+        :base => "reviews.json",
+        :user => "#{user_base}/reviews.json"
+      }
     end
 
     def list
-      response = site[users_resource].get
+      response = site[resource[:user]].get
       decode response.body
     end
 
     def all
-      response = site[resource].get
+      response = site[resource[:base]].get
       decode response.body
     end
   end

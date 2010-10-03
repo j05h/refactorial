@@ -48,10 +48,10 @@ class TestRunner < Test::Unit::TestCase
 
   context :run do
     should_call_runner_method 'setup', 'new_setup'
-    should_call_runner_method 'request', 'new_request'
+    should_call_runner_method 'request', 'new_request', { :data => nil }
     should_call_runner_method 'requests', 'list_requests'
     should_call_runner_method 'reviews', 'list_reviews'
-    should_call_runner_method 'pop', 'pop_review'
+    should_call_runner_method 'pop', 'pop_request'
 
     should "print not a command message" do
       output = @runner.run('poop')
@@ -70,6 +70,15 @@ class TestRunner < Test::Unit::TestCase
     should "not create bad requests" do
       assert_raise(RuntimeError) do
         output = @runner.new_request({})
+      end
+    end
+  end
+
+  context :pop_request do
+    should 'clone a request' do
+      mock_http 'pop_request' do
+        output = @runner.pop_request({}) 
+        assert_match /^Request cloned at ~\/refactorial/, output
       end
     end
   end

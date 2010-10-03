@@ -6,6 +6,7 @@ module Refactorial
     def initialize args
       @options = parse_options args
       @command = ARGV.shift
+      @data = ARGV.shift
     end
 
     def print string
@@ -51,13 +52,20 @@ module Refactorial
         print "Refactorial account setup for #{setup.github_user.green}" if setup.refactorial_account?
       end
 
-      print "API token is " + setup.github_token.nil? ? 'not setup'.red : 'ok'.green
+      print "API token is " + ( setup.github_token.nil? ? 'not setup'.red : 'ok'.green )
+    end
+
+    def pop_request options
+      request = Request.new
+      response = request.pop
+      request.clone response["request"]["url"]
+      print 'Request cloned at ~/refactorial'
     end
 
     def run command = @command, options = @options
       case command
       when 'request'
-        new_request options
+        new_request( { :data => @data } )
       when 'requests'
         list_requests options
       when 'reviews'
@@ -65,7 +73,7 @@ module Refactorial
       when 'setup'
         new_setup options
       when 'pop'
-        pop_review options
+        pop_request options
       else
         print "#{command} is not a recognized command"
         # we should print the OptionsParser object here.
@@ -93,7 +101,7 @@ Usage:
    refactorial request ./path/to/file
    refactorial requests
    refactorial reviews
-
+   refactorial pop
 Options: ]
 
           opts.on '-v', '--[no-]verbose', 'Turn on verbose' do |v|
